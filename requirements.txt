@@ -4,3 +4,4 @@ torchvision
 numpy
 pillow
 scikit-image
+gunicorn
