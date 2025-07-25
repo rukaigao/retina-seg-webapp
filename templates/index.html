@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Retina Segmentation</title>
+</head>
+<body>
+    <h1>Upload Retina Image</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label>Raw Image (required):</label><br>
+        <input type="file" name="raw" required><br><br>
+
+        <label>AVA Mask (optional):</label><br>
+        <input type="file" name="ava"><br>
+
+        <label>PNV Mask (optional):</label><br>
+        <input type="file" name="pnv"><br>
+
+        <label>ONH Mask (optional):</label><br>
+        <input type="file" name="onh"><br>
+
+        <label>Edge Mask (optional):</label><br>
+        <input type="file" name="edges"><br><br>
+
+        <input type="submit" value="Segment">
+    </form>
+
+    {% if dice %}
+        <h2>Dice Scores</h2>
+        <ul>
+        {% for key, score in dice.items() %}
+            <li>{{ key.upper() }}: {{ score if score != None else "N/A" }}</li>
+        {% endfor %}
+        </ul>
+
+        <h2>Download Predicted Masks</h2>
+        <ul>
+        {% for key in filenames %}
+            <li><a href="/static/output/{{ key }}_pred.png">Download {{ key.upper() }} Mask</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
